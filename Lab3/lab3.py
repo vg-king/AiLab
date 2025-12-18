@@ -139,13 +139,13 @@ def solve_vacuum_world(start_loc=0, left_dirty=1, right_dirty=1):
     while not vw.is_clean() and step < 10:
         step += 1
         
-        # Reflex rule
+       
         if vw.location == 0:  # In left room
             if vw.left_dirty == 1:
                 action = 'S'
             else:
                 action = 'R'
-        else:  # In right room
+        else:  
             if vw.right_dirty == 1:
                 action = 'S'
             else:
@@ -169,7 +169,6 @@ def interactive_mode():
     
     vw = VacuumWorld()
     
-    # Get initial state
     print("\nSetup Initial State:")
     loc = input("Starting location (L/R): ").strip().upper()
     vw.location = 0 if loc == 'L' else 1
@@ -183,7 +182,6 @@ def interactive_mode():
     print("\nInitial State:")
     vw.display()
     
-    # Manual control
     step = 0
     while True:
         if vw.is_clean():
@@ -207,19 +205,15 @@ def interactive_mode():
 
 
 if __name__ == "__main__":
-    # Show complete state space
     generate_state_space()
     
-    # Demonstrate simple reflex agent
     print("\n" + "="*60)
     solve_vacuum_world(start_loc=0, left_dirty=1, right_dirty=1)
     
-    # Test different starting states
     print("\n" + "="*60)
     print("Testing from Right room:")
     solve_vacuum_world(start_loc=1, left_dirty=1, right_dirty=1)
     
-    # Interactive mode
     print("\n" + "="*60)
     choice = input("\nTry interactive mode? (y/n): ").strip().lower()
     if choice == 'y':

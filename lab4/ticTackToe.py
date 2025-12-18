@@ -113,15 +113,15 @@ def play_game():
         if check_winner(board, current_player):
             print_board(board)
             if current_player == 'X':
-                print(f"🎉 You win!")
+                print(f" You win!")
             else:
-                print(f"🤖 AI wins!")
+                print(f" AI wins!")
             break
         
         # Check for draw
         if is_board_full(board):
             print_board(board)
-            print("🤝 It's a draw!")
+            print(" It's a draw!")
             break
         
         # Switch player

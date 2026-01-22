@@ -12,11 +12,10 @@ def print_board(board):
 
 def check_winner(board, player):
     """Check if player has won"""
-    # Win conditions: rows, columns, diagonals
     wins = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8],  # Rows
-        [0, 3, 6], [1, 4, 7], [2, 5, 8],  # Columns
-        [0, 4, 8], [2, 4, 6]              # Diagonals
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], 
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+        [0, 4, 8], [2, 4, 6]              
     ]
     
     for combo in wins:
@@ -47,7 +46,6 @@ def get_ai_move(board):
     """AI makes a move using simple strategy"""
     import random
     
-    # 1. Try to win
     for i in range(9):
         if board[i] == ' ':
             board[i] = 'O'
@@ -56,7 +54,6 @@ def get_ai_move(board):
                 return i
             board[i] = ' '
     
-    # 2. Block opponent's winning move
     for i in range(9):
         if board[i] == ' ':
             board[i] = 'X'
@@ -65,17 +62,14 @@ def get_ai_move(board):
                 return i
             board[i] = ' '
     
-    # 3. Take center if available
     if board[4] == ' ':
         return 4
     
-    # 4. Take a corner
     corners = [0, 2, 6, 8]
     available_corners = [i for i in corners if board[i] == ' ']
     if available_corners:
         return random.choice(available_corners)
     
-    # 5. Take any available space
     available = [i for i in range(9) if board[i] == ' ']
     return random.choice(available) if available else None
 
@@ -91,16 +85,14 @@ def play_game():
     print("\nPositions:")
     print_board(board)
     
-    # Reset board for game
     board = [' '] * 9
     
     while True:
         print_board(board)
         
-        # Get move (Human or AI)
         if current_player == 'X':
             move = get_move(board, current_player)
-        else:  # AI's turn (Player O)
+        else: 
             print("AI (O) is thinking...")
             import time
             time.sleep(0.5)
@@ -109,7 +101,6 @@ def play_game():
         
         board[move] = current_player
         
-        # Check for winner
         if check_winner(board, current_player):
             print_board(board)
             if current_player == 'X':
@@ -118,13 +109,11 @@ def play_game():
                 print(f" AI wins!")
             break
         
-        # Check for draw
         if is_board_full(board):
             print_board(board)
             print(" It's a draw!")
             break
         
-        # Switch player
         current_player = 'O' if current_player == 'X' else 'X'
 
 
